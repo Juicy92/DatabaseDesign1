@@ -1,16 +1,12 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class deleteDb extends Tab {
     ListView<String> list = new ListView<String>();
@@ -38,63 +34,10 @@ public class deleteDb extends Tab {
             @Override
             public void handle(ActionEvent event) {
                 if (rb1.isSelected()) {
+                    // if customers radiobutton is selected
+
                     try {
-                        String query="select * from test";
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/frank?serverTimezone=GMT", "user", "pass");
-                        Statement al = con.createStatement();
-                        ResultSet rs = al.executeQuery(query);
-
-                        while (rs.next()) {
-                            list.getItems().add(rs.getString("id")+"\t"+rs.getString("name"));
-
-
-
-                        }
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-                        list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-                        Button bt1 = new Button("Delete!");
-                        Stage dialog = new Stage();
-                        GridPane grd_pan = new GridPane();
-                        grd_pan.setAlignment(Pos.CENTER);
-                        grd_pan.setHgap(10);
-                        grd_pan.setVgap(10);//pading
-                        Scene scene = new Scene(grd_pan, 300, 300);
-                        dialog.setScene(scene);
-                        dialog.setTitle("alert");
-                        dialog.initModality(Modality.WINDOW_MODAL);
-                        Label label = new Label("Please choose a row to delete");
-
-                        grd_pan.add(label,0,0);
-                        grd_pan.add(list, 0, 1);
-                        grd_pan.add(bt1,0,2);
-
-
-
-                        bt1.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent event) {
-                                if (list.getSelectionModel().getSelectedItem() != null) {
-                                    String choice ="";
-
-                                    String queryD= "delete from test where id=?";
-                                    try {
-                                        PreparedStatement pstmt = con.prepareStatement(queryD);
-                                        pstmt.setString(1,list.getSelectionModel().getSelectedItem());
-                                        pstmt.executeUpdate();
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                }
-                            }
-                        });
-
-
-
-                        dialog.showAndWait();
-                        rs.close();
-                        al.close();
+                        new DeleteCustomerDialog();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
