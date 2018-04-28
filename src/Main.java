@@ -1,6 +1,8 @@
 
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,9 +10,9 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Main extends Application {
-
 
     public void start(Stage PrimaryStage)throws Exception{
 
@@ -36,6 +38,11 @@ public class Main extends Application {
             ResultSet rs = st.executeQuery("SELECT * FROM test");
             ResultSetMetaData rsmd = rs.getMetaData();
             DatabaseMetaData meta = con.getMetaData();
+
+
+
+
+
 
 
 

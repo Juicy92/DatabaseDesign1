@@ -45,13 +45,15 @@ public class deleteDb extends Tab {
                         ResultSet rs = al.executeQuery(query);
 
                         while (rs.next()) {
-                            list.getItems().add(rs.getString("test"));
-                            System.out.println(rs.getString(1));
+                            list.getItems().add(rs.getString("id")+"\t"+rs.getString("name"));
+
+
 
                         }
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                         list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+                        Button bt1 = new Button("Delete!");
                         Stage dialog = new Stage();
                         GridPane grd_pan = new GridPane();
                         grd_pan.setAlignment(Pos.CENTER);
@@ -61,9 +63,34 @@ public class deleteDb extends Tab {
                         dialog.setScene(scene);
                         dialog.setTitle("alert");
                         dialog.initModality(Modality.WINDOW_MODAL);
+                        Label label = new Label("Please choose a row to delete");
 
-                        Label lab_alert = new Label("hello");
+                        grd_pan.add(label,0,0);
                         grd_pan.add(list, 0, 1);
+                        grd_pan.add(bt1,0,2);
+
+
+
+                        bt1.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                if (list.getSelectionModel().getSelectedItem() != null) {
+                                    String choice ="";
+
+                                    String queryD= "delete from test where id=?";
+                                    try {
+                                        PreparedStatement pstmt = con.prepareStatement(queryD);
+                                        pstmt.setString(1,list.getSelectionModel().getSelectedItem());
+                                        pstmt.executeUpdate();
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            }
+                        });
+
+
 
                         dialog.showAndWait();
                         rs.close();
