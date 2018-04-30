@@ -12,7 +12,7 @@ public class DeleteCustomerDialog extends Dialog {
     private Statement statement;
 
     public DeleteCustomerDialog() throws SQLException {
-        con = DriverManager.getConnection("jdbc:mysql://localhost/frank?serverTimezone=GMT", "user", "pass");
+        con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         statement = con.createStatement();
 
         updateData();
@@ -28,7 +28,7 @@ public class DeleteCustomerDialog extends Dialog {
                         System.out.println(list.getSelectionModel().getSelectedIndex());
                         resultSet.absolute(list.getSelectionModel().getSelectedIndex() + 1); // Move result set cursor to the item we have selected
 
-                        String deleteQuery = "DELETE FROM test WHERE id = " + resultSet.getInt("id");
+                        String deleteQuery = "DELETE FROM customers WHERE CustomerNo = " + resultSet.getInt("CustomerNo");
                         System.out.println(deleteQuery);
 
                         statement.executeUpdate(deleteQuery);
@@ -38,6 +38,7 @@ public class DeleteCustomerDialog extends Dialog {
                         e.printStackTrace();
                     }
 
+                    getDialogPane().getScene().getWindow().hide();
                 }
             }
         });
@@ -54,11 +55,11 @@ public class DeleteCustomerDialog extends Dialog {
     private void updateData() throws SQLException {
         list.getItems().clear();
 
-        String query = "select * from test";
+        String query = "select * from Customers";
         resultSet = statement.executeQuery(query);
 
         while (resultSet.next()) {
-            list.getItems().add(resultSet.getString("id") + "\t" + resultSet.getString("name"));
+            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " +resultSet.getString("fname") );
 
         }
     }

@@ -31,11 +31,11 @@ public class Main extends Application {
 
 
         try {
-            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/frank?serverTimezone=GMT","user","pass");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT","user","pass");
             Statement statement= con.createStatement();
             // statement.executeUpdate("CREATE TABLE test (id int(10) PRIMARY  KEY ,name VARCHAR(12))");
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM test");
+            ResultSet rs = st.executeQuery("SELECT * FROM customers");
             ResultSetMetaData rsmd = rs.getMetaData();
             DatabaseMetaData meta = con.getMetaData();
 
