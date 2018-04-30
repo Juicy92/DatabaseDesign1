@@ -43,12 +43,12 @@ public class InsertFuelDialog extends Dialog {
         grid.add(labelSellPricePerLitre, 1, 5);
         grid.add(textFieldSellPricePerLitre, 2, 5);
 
-        Button confirm = new Button("Confirm");
-        VBox vBox = new VBox(grid, confirm);
+        Button confirmButton = new Button("Confirm");
+        VBox vBox = new VBox(grid, confirmButton);
 
         getDialogPane().setContent(vBox);
 
-        confirm.setOnAction(event1 -> {
+        confirmButton.setOnAction(event1 -> {
             String strFuelType = textFieldFuelTypeId.getText();
             String strFuelName = textFieldFuelName.getText();
             String strFuelDescription = textFieldFuelDescription.getText();

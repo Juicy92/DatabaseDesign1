@@ -29,8 +29,8 @@ public class deleteDb extends Tab {
         rb2.setToggleGroup(group);
         rb2.setSelected(false);
 
-        Button bt1 = new Button("Ok");
-        bt1.setOnAction(new EventHandler<ActionEvent>() {
+        Button okButton = new Button("Ok");
+        okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if (rb1.isSelected()) {
@@ -41,6 +41,8 @@ public class deleteDb extends Tab {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
+                } else if (rb2.isSelected()){
+                    // TODO: 30/04/2018 Delete fuel
                 }
             }
         });
@@ -50,7 +52,7 @@ public class deleteDb extends Tab {
         vb.getChildren().add(label);
         vb.getChildren().add(rb1);
         vb.getChildren().add(rb2);
-        vb.getChildren().add(bt1);
+        vb.getChildren().add(okButton);
 
         Delete.getChildren().add(hb);
         Delete.getChildren().add(vb);

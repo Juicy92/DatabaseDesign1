@@ -45,12 +45,12 @@ public class InsertCustomerDialog extends Dialog {
         grid.add(textFieldPhone, 2, 5);
 
 
-        Button confirm = new Button("Confirm");
+        Button confirmButton = new Button("Confirm");
 
-        VBox vBox = new VBox(grid, confirm);
+        VBox vBox = new VBox(grid, confirmButton);
         getDialogPane().setContent(vBox);
 
-        confirm.setOnAction(new EventHandler<ActionEvent>() {
+        confirmButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String strCustomer = textFieldCustomer.getText();
@@ -60,7 +60,6 @@ public class InsertCustomerDialog extends Dialog {
                 String strPhone = textFieldPhone.getText();
 
                 try {
-
                     Statement st = con.createStatement();
 
                     String query = "Insert into Customers(CustomerNo,fname,lname,Address,PhoneNo) values('" + strCustomer + "','" + strFName + "','" + strLName + "','" + strAddress + "','" + strPhone + "')";
