@@ -6,10 +6,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class insertDb extends Tab {
 
 
-    public insertDb() {
+    public insertDb() throws SQLException {
+        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT","user","pass");
         StackPane Insert = new StackPane();
         setText("Insert record");
 
@@ -65,47 +71,55 @@ public class insertDb extends Tab {
                         @Override
                         public void handle(ActionEvent event) {
 
+
+                            try {
+
+                                Statement st =con.createStatement();
+                                st.executeUpdate("Insert into Customers values('" + text1.toString() + "','" + text2.toString() + "','" + text3.toString() + "','" + text4.toString() + "','" + text5.toString() + "')");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                     dialog.showAndWait();
                 }
-                    if(rb2.isSelected()){
-                        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-                        dialog.setTitle("Fuel Type DB");
-                        dialog.setHeaderText("Please fill the relavant fields");
-                        Label label4 = new Label("Fuel Type ID");
-                        Label label1 = new Label("Fuel Name");
-                        Label label2 = new Label("Fuel Description");
-                        Label label3 = new Label("Buy Price Per Litre");
-                        Label label5 = new Label("Sell Price Per Litre");
+                if (rb2.isSelected()) {
+                    Alert dialog = new Alert(Alert.AlertType.INFORMATION);
+                    dialog.setTitle("Fuel Type DB");
+                    dialog.setHeaderText("Please fill the relavant fields");
+                    Label label4 = new Label("Fuel Type ID");
+                    Label label1 = new Label("Fuel Name");
+                    Label label2 = new Label("Fuel Description");
+                    Label label3 = new Label("Buy Price Per Litre");
+                    Label label5 = new Label("Sell Price Per Litre");
 
-                        TextField text1 = new TextField();
-                        TextField text2 = new TextField();
-                        TextField text3 = new TextField();
-                        TextField text4 = new TextField();
-                        TextField text5 = new TextField();
+                    TextField text1 = new TextField();
+                    TextField text2 = new TextField();
+                    TextField text3 = new TextField();
+                    TextField text4 = new TextField();
+                    TextField text5 = new TextField();
 
 
-                        GridPane grid = new GridPane();
-                        grid.add(label4, 1, 1);
-                        grid.add(text4, 2, 1);
-                        grid.add(label1, 1, 2);
-                        grid.add(text1, 2, 2);
-                        grid.add(label2, 1, 3);
-                        grid.add(text2, 2, 3);
-                        grid.add(label3, 1, 4);
-                        grid.add(text3, 2, 4);
-                        grid.add(label5, 1, 5);
-                        grid.add(text5, 2, 5);
+                    GridPane grid = new GridPane();
+                    grid.add(label4, 1, 1);
+                    grid.add(text4, 2, 1);
+                    grid.add(label1, 1, 2);
+                    grid.add(text1, 2, 2);
+                    grid.add(label2, 1, 3);
+                    grid.add(text2, 2, 3);
+                    grid.add(label3, 1, 4);
+                    grid.add(text3, 2, 4);
+                    grid.add(label5, 1, 5);
+                    grid.add(text5, 2, 5);
 
-                        dialog.getDialogPane().setContent(grid);
+                    dialog.getDialogPane().setContent(grid);
 
-                        Button confirm = new Button("Confirm");
-                        confirm.setOnAction(event1 -> {
+                    Button confirm = new Button("Confirm");
+                    confirm.setOnAction(event1 -> {
 
-                        });
-                        dialog.showAndWait();
-                    }
+                    });
+                    dialog.showAndWait();
+                }
 
             }
         });
