@@ -50,8 +50,8 @@ public class deleteDb extends Tab {
 
                         while (rs.next()) {
 
-                            list.getItems().add(rs.getString("id") + "\t" + rs.getString("name"));
-                            ids.add(rs.getInt("id"));
+                            list.getItems().add(rs.getString("CustomerNo") + "\t" + rs.getString("fname"));
+                            ids.add(rs.getInt("CustomerNo"));
 
 
                         }
@@ -90,7 +90,7 @@ public class deleteDb extends Tab {
 
                                     }
 
-                                    String queryD = "delete from customers where id=?";
+                                    String queryD = "delete from customers where customerNo=?";
 
 
                                     try {
