@@ -59,7 +59,7 @@ public class DeleteCustomerDialog extends Dialog {
         resultSet = statement.executeQuery(query);
 
         while (resultSet.next()) {
-            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " +resultSet.getString("fname") );
+            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " + resultSet.getString("lname"));
 
         }
     }
