@@ -15,7 +15,7 @@ public class insertDb extends Tab {
 
 
     public insertDb() throws SQLException {
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT","user","pass");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         StackPane Insert = new StackPane();
         setText("Insert record");
 
@@ -46,10 +46,15 @@ public class insertDb extends Tab {
                     Label label5 = new Label("Phone Number");
 
                     TextField text1 = new TextField();
+                    String str1 = text1.getText();
                     TextField text2 = new TextField();
+                    String str2 = text2.getText();
                     TextField text3 = new TextField();
+                    String str3 = text3.getText();
                     TextField text4 = new TextField();
+                    String str4 = text4.getText();
                     TextField text5 = new TextField();
+                    String str5 = text5.getText();
 
 
                     GridPane grid = new GridPane();
@@ -74,8 +79,9 @@ public class insertDb extends Tab {
 
                             try {
 
-                                Statement st =con.createStatement();
-                                st.executeUpdate("Insert into Customers values('" + text1.toString() + "','" + text2.toString() + "','" + text3.toString() + "','" + text4.toString() + "','" + text5.toString() + "')");
+                                Statement st = con.createStatement();
+
+                                st.executeQuery("Insert into Customers(CustomerNo,fname,lname,Address,PhoneNo) values('"+str1+"','"+str2+"','"+str3+"','"+str4+"','"+str5+"')");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
