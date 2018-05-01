@@ -12,7 +12,7 @@ public class UpdateCustomersDialog extends Dialog {
     private Connection con;
     private Statement statement;
 
-    public UpdateCustomersDialog()throws SQLException {
+    public UpdateCustomersDialog() throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         statement = con.createStatement();
 
@@ -61,11 +61,10 @@ public class UpdateCustomersDialog extends Dialog {
                         resultSet.absolute(list.getSelectionModel().getSelectedIndex() + 1); // Move result set cursor to the item we have selected
 
 
+                        String updateQuery = "UPDATE customers SET CustomerNo='" + strCustomer + "',fName='" + strFName + "',lName='" + strLName + "',Address='" + strAddress + "',PhoneNo='" + strPhone + "' WHERE CustomerNo = '" + resultSet.getString("CustomerNo") + "';";
+                        System.out.println(updateQuery);
 
-                        String deleteQuery = "UPDATE customers SET CustomerNo="+strCustomer+",fName="+strFName+",lName="+strLName+",Address='"+strAddress+"',PhoneNo="+strPhone+"WHERE CustomerNo = '" + resultSet.getString("CustomerNo") + "';";
-                        System.out.println(deleteQuery);
-
-                        statement.executeUpdate(deleteQuery);
+                        statement.executeUpdate(updateQuery);
 
                         updateData();
                     } catch (SQLException e) {
@@ -80,11 +79,12 @@ public class UpdateCustomersDialog extends Dialog {
         Label label = new Label("Please choose a row to Update");
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, list, deleteButton,grid); // add the items to the vbox
+        vBox.getChildren().addAll(label, list, deleteButton, grid); // add the items to the vbox
 
         getDialogPane().setContent(vBox); // add the items to the view
         showAndWait();
     }
+
     private void updateData() throws SQLException {
         list.getItems().clear();
 
