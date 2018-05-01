@@ -5,20 +5,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
-public class deleteDb extends Tab {
-    ListView<String> list = new ListView<String>();
-    int count = 1;
+public class updateDb extends Tab {
+    public updateDb()throws SQLException {
 
+        StackPane Update = new StackPane();
+        setText("Update Record");
 
-    public deleteDb() {
-        StackPane Delete = new StackPane();
-        setText("Delete Record");
-
-        Label label = new Label("Please choose what Database you want to Delete a record From");
-        setContent(Delete);
+        Label label = new Label("Please choose what Table you want to Update a record From");
+        setContent(Update);
         VBox vb = new VBox();
         ToggleGroup group = new ToggleGroup();
         RadioButton rb1 = new RadioButton("Customers");
@@ -33,23 +29,21 @@ public class deleteDb extends Tab {
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (rb1.isSelected()) {
-                    // if customers radiobutton is selected
+                if(rb1.isSelected()){
 
                     try {
-                        new DeleteCustomerDialog();
+                        new UpdateCustomersDialog();
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                } else if (rb2.isSelected()){
-                    try {
-                        new DeleteFuelTypeDialog();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+
+                }
+                if(rb2.isSelected()){
+
                 }
             }
         });
+
         HBox hb = new HBox();
         hb.getChildren().add(vb);
 
@@ -58,9 +52,8 @@ public class deleteDb extends Tab {
         vb.getChildren().add(rb2);
         vb.getChildren().add(okButton);
 
-        Delete.getChildren().add(hb);
-        Delete.getChildren().add(vb);
+        Update.getChildren().add(hb);
+        Update.getChildren().add(vb);
     }
-
 
 }

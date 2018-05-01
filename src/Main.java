@@ -12,11 +12,12 @@ public class Main extends Application {
         TabPane tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         Scene scene = new Scene(tabPane, 300, 300);
-
+        updateDb up=new updateDb();
         insertDb woo = new insertDb();
         deleteDb deleteDb = new deleteDb();
         tabPane.getTabs().add(woo);
         tabPane.getTabs().add(deleteDb);
+        tabPane.getTabs().add(up);
 
         PrimaryStage.setScene(scene);
 
