@@ -28,7 +28,7 @@ public class DeleteCustomerDialog extends Dialog {
                         System.out.println(list.getSelectionModel().getSelectedIndex());
                         resultSet.absolute(list.getSelectionModel().getSelectedIndex() + 1); // Move result set cursor to the item we have selected
 
-                        String deleteQuery = "DELETE FROM customers WHERE CustomerNo = " + resultSet.getInt("CustomerNo");
+                        String deleteQuery = "DELETE FROM customers WHERE CustomerNo = '" + resultSet.getString("CustomerNo") + "';";
                         System.out.println(deleteQuery);
 
                         statement.executeUpdate(deleteQuery);
