@@ -7,8 +7,8 @@ import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 
-public class updateDb extends Tab {
-    public updateDb()throws SQLException {
+ class updateDb extends Tab {
+     updateDb()throws SQLException {
 
         StackPane Update = new StackPane();
         setText("Update Record");
@@ -39,6 +39,11 @@ public class updateDb extends Tab {
 
                 }
                 if(rb2.isSelected()){
+                    try {
+                        new UpdateFuelTypeDialog();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             }

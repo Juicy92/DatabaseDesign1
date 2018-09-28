@@ -12,35 +12,19 @@ public class Main extends Application {
         TabPane tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         Scene scene = new Scene(tabPane, 300, 300);
+        viewDb view = new viewDb();
         updateDb up=new updateDb();
         insertDb woo = new insertDb();
         deleteDb deleteDb = new deleteDb();
         tabPane.getTabs().add(woo);
         tabPane.getTabs().add(deleteDb);
         tabPane.getTabs().add(up);
+        tabPane.getTabs().add(view);
 
         PrimaryStage.setScene(scene);
 
         PrimaryStage.show();
 
-
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
-            Statement statement = con.createStatement();
-            // statement.executeUpdate("CREATE TABLE test (id int(10) PRIMARY  KEY ,name VARCHAR(12))");
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM customers");
-            ResultSetMetaData rsmd = rs.getMetaData();
-            DatabaseMetaData meta = con.getMetaData();
-
-
-            int columnsNumber = rsmd.getColumnCount();
-            System.out.println(columnsNumber);
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
     }
 }

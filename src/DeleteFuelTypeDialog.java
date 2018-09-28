@@ -5,13 +5,13 @@ import javafx.scene.layout.VBox;
 
 import java.sql.*;
 
-public class DeleteFuelTypeDialog extends Dialog {
+class DeleteFuelTypeDialog extends Dialog {
     private ListView<String> list = new ListView<>();
     private ResultSet resultSet;
     private Connection con;
     private Statement statement;
 
-    public DeleteFuelTypeDialog() throws SQLException {
+    DeleteFuelTypeDialog() throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         statement = con.createStatement();
 

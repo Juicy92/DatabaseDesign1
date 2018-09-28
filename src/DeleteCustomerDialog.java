@@ -5,13 +5,13 @@ import javafx.scene.layout.VBox;
 
 import java.sql.*;
 
-public class DeleteCustomerDialog extends Dialog {
+class DeleteCustomerDialog extends Dialog {
     private ListView<String> list = new ListView<>();
     private ResultSet resultSet;
     private Connection con;
     private Statement statement;
 
-    public DeleteCustomerDialog() throws SQLException {
+    DeleteCustomerDialog() throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         statement = con.createStatement();
 
@@ -59,7 +59,7 @@ public class DeleteCustomerDialog extends Dialog {
         resultSet = statement.executeQuery(query);
 
         while (resultSet.next()) {
-            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " + resultSet.getString("lname"));
+            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " + resultSet.getString("lname")+" "+resultSet.getString("Address")+" "+resultSet.getString("PhoneNo"));
 
         }
     }

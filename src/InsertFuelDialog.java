@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertFuelDialog extends Dialog {
+class InsertFuelDialog extends Dialog {
 
-    public InsertFuelDialog() throws SQLException {
+    InsertFuelDialog() throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
 
 

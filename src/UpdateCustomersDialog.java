@@ -6,13 +6,13 @@ import javafx.scene.layout.VBox;
 
 import java.sql.*;
 
-public class UpdateCustomersDialog extends Dialog {
+ class UpdateCustomersDialog extends Dialog {
     private ListView<String> list = new ListView<>();
     private ResultSet resultSet;
     private Connection con;
     private Statement statement;
 
-    public UpdateCustomersDialog() throws SQLException {
+     UpdateCustomersDialog() throws SQLException {
         con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
         statement = con.createStatement();
 
@@ -44,8 +44,8 @@ public class UpdateCustomersDialog extends Dialog {
         updateData();
 
         list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Button deleteButton = new Button("Update!");
-        deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+        Button UpdateButton = new Button("Update!");
+        UpdateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if (list.getSelectionModel().getSelectedItem() != null) {
@@ -71,7 +71,7 @@ public class UpdateCustomersDialog extends Dialog {
                         e.printStackTrace();
                     }
 
-                    getDialogPane().getScene().getWindow().hide();
+
                 }
             }
         });
@@ -79,7 +79,10 @@ public class UpdateCustomersDialog extends Dialog {
         Label label = new Label("Please choose a row to Update");
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(label, list, deleteButton, grid); // add the items to the vbox
+
+
+        vBox.getChildren().addAll(label, list, UpdateButton, grid); // add the items to the vbox
+
 
         getDialogPane().setContent(vBox); // add the items to the view
         showAndWait();
@@ -92,7 +95,7 @@ public class UpdateCustomersDialog extends Dialog {
         resultSet = statement.executeQuery(query);
 
         while (resultSet.next()) {
-            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " + resultSet.getString("lname"));
+            list.getItems().add(resultSet.getString("CustomerNo") + "\t" + resultSet.getString("fname") + " " + resultSet.getString("lname")+" "+resultSet.getString("Address")+" "+resultSet.getString("PhoneNo"));
 
         }
     }

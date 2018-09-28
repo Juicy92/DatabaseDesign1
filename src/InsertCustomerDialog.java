@@ -12,9 +12,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertCustomerDialog extends Dialog {
+class InsertCustomerDialog extends Dialog {
 
-    public InsertCustomerDialog() throws SQLException {
+    InsertCustomerDialog() throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/databasedesign?serverTimezone=GMT", "user", "pass");
 
         setTitle("Customer DB");

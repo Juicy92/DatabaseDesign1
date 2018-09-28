@@ -7,10 +7,10 @@ import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 
-public class insertDb extends Tab {
+class insertDb extends Tab {
 
 
-    public insertDb() {
+    insertDb() {
         StackPane Insert = new StackPane();
         setText("Insert record");
 
